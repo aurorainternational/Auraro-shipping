@@ -2,133 +2,137 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auraro International Shipping - Package Tracking</title>
+  <title>Auraro International Shipping - Tracking</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 50px;
-      background-color: #f4f4f4;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
     }
-    input {
+    header {
+      background: #004080;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #004080;
+    }
+    input[type="text"] {
+      width: 70%;
       padding: 10px;
-      width: 280px;
-      margin-right: 5px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
     button {
       padding: 10px 15px;
-      background: #007bff;
-      color: white;
+      background: #004080;
+      color: #fff;
       border: none;
+      border-radius: 4px;
       cursor: pointer;
-      border-radius: 5px;
     }
     button:hover {
-      background: #0056b3;
+      background: #0066cc;
     }
-    #result {
+    .result {
       margin-top: 20px;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      display: none; /* hidden until correct code */
-      text-align: left;
-      min-width: 350px;
+    }
+    .status {
+      font-weight: bold;
+      color: #cc9900;
+      margin-bottom: 15px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
+      margin-bottom: 20px;
     }
-    th, td {
+    table th, table td {
+      padding: 10px;
       border: 1px solid #ddd;
-      padding: 8px;
       text-align: left;
     }
-    th {
-      background-color: #007bff;
-      color: white;
+    table th {
+      background: #004080;
+      color: #fff;
     }
-    .info-box {
-      margin-top: 20px;
-      padding: 10px;
+    table tr:nth-child(even) {
       background: #f9f9f9;
-      border: 1px solid #ccc;
-      border-radius: 6px;
     }
-    .error {
-      margin-top: 15px;
-      color: red;
-      font-weight: bold;
+    .info {
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    .info strong {
+      display: inline-block;
+      width: 120px;
     }
   </style>
 </head>
 <body>
-  <h1>📦 Auraro International Shipping - Track Your Package</h1>
-
-  <input type="text" id="trackingCode" placeholder="Enter Tracking Code">
-  <button onclick="trackPackage()">Track</button>
-
-  <div id="error" class="error"></div>
-  <div id="result"></div>
+  <header>Auraro International Shipping</header>
+  <div class="container">
+    <h2>Track Your Shipment</h2>
+    <input type="text" id="trackingInput" placeholder="Enter Tracking Code">
+    <button onclick="track()">Track</button>
+    <div class="result" id="result"></div>
+  </div>
 
   <script>
-    const shipments = {
-      "TR599652932": {
-        company: "Auraro International Shipping",
-        shipper: "Ron Delucca, Saint Petersburg, Russia (deluccar1948@gmail.com)",
-        receiver: "Matthew Joseph Estilette, 1113 David St, New Iberia, LA 70560, USA",
-        status: "🟡 In Transit",
-        currentLocation: "Saint Petersburg, Russia",
-        expectedDelivery: "2nd September 2025 by end of the day",
-        history: [
-          { date: "29th August 2025", time: "11:00 AM", event: "Item received from shipper", location: "Saint Petersburg, Russia" }
-        ]
-      }
-    };
+    function track() {
+      const code = document.getElementById("trackingInput").value.trim();
+      const result = document.getElementById("result");
 
-    function trackPackage() {
-      const code = document.getElementById("trackingCode").value.trim();
-      const resultDiv = document.getElementById("result");
-      const errorDiv = document.getElementById("error");
-
-      if (shipments[code]) {
-        errorDiv.innerHTML = "";
-        resultDiv.style.display = "block";
-        const s = shipments[code];
-
-        // Build tracking history table
-        let historyTable = `
-          <table>
-            <tr><th>Date</th><th>Time</th><th>Location</th><th>Event</th></tr>
-            ${s.history.map(h => `
-              <tr>
-                <td>${h.date}</td>
-                <td>${h.time}</td>
-                <td>${h.location}</td>
-                <td>${h.event}</td>
-              </tr>`).join("")}
-          </table>
-        `;
-
-        resultDiv.innerHTML = `
-          <h2>${s.company}</h2>
-          <h3>Status: ${s.status}</h3>
-          <p><b>Current Location:</b> ${s.currentLocation}</p>
-          <p><b>Expected Delivery:</b> ${s.expectedDelivery}</p>
+      if (code === "TR599652932") {
+        result.innerHTML = `
+          <p class="status">🟡 In Transit — Expected delivery: <strong>2nd September 2025 (by end of the day)</strong></p>
           
-          <h4>📜 Tracking History:</h4>
-          ${historyTable}
+          <h3>Shipment History</h3>
+          <table>
+            <tr>
+              <th>Date & Time</th>
+              <th>Location</th>
+              <th>Event</th>
+            </tr>
+            <tr>
+              <td>29th August 2025 - 11:00 AM</td>
+              <td>Saint Petersburg, Russia</td>
+              <td>Item received from shipper</td>
+            </tr>
+          </table>
 
-          <div class="info-box">
-            <p><b>Shipper:</b> ${s.shipper}</p>
-            <p><b>Receiver:</b> ${s.receiver}</p>
+          <h3>Shipper Information</h3>
+          <div class="info">
+            <p><strong>Name:</strong> Ron Delucca</p>
+            <p><strong>Location:</strong> Russia</p>
+            <p><strong>Email:</strong> deluccar1948@gmail.com</p>
+          </div>
+
+          <h3>Receiver Information</h3>
+          <div class="info">
+            <p><strong>Name:</strong> Matthew Joseph Estilette</p>
+            <p><strong>Location:</strong> USA</p>
+            <p><strong>Address:</strong> 1113 David St, New Iberia, LA 70560, USA</p>
           </div>
         `;
       } else {
-        resultDiv.style.display = "none";
-        errorDiv.innerHTML = "❌ Tracking code not found.";
+        result.innerHTML = `<p style="color:red;">❌ Tracking code not found</p>`;
       }
     }
   </script>
