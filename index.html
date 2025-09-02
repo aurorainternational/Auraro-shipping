@@ -2,56 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Auraro International Shipping - Tracking</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
+      background: #f8f9fa;
       margin: 0;
       padding: 0;
     }
     header {
-      background: #004080;
-      color: #fff;
-      padding: 15px;
+      background: #003366;
+      color: white;
       text-align: center;
-    }
-    main {
-      max-width: 900px;
-      margin: 20px auto;
-      background: #fff;
       padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h2 {
-      color: #004080;
+      color: #003366;
+      margin-top: 0;
+    }
+    .hidden {
+      display: none;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #003366;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0055aa;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 20px 0;
-    }
-    table, th, td {
-      border: 1px solid #ddd;
+      margin-top: 15px;
     }
     th, td {
+      border: 1px solid #ddd;
       padding: 12px;
       text-align: left;
     }
     th {
-      background: #004080;
+      background: #003366;
       color: white;
     }
     tr:nth-child(even) {
-      background: #f9f9f9;
-    }
-    .section {
-      margin-top: 20px;
+      background: #f2f2f2;
     }
     .status {
       font-weight: bold;
-      color: #ff9900;
     }
   </style>
 </head>
@@ -60,73 +76,88 @@
     <h1>Auraro International Shipping</h1>
     <p>Track Your Shipment</p>
   </header>
-  <main>
-    <h2>Tracking Code: TR599652932</h2>
-    <p class="status">📦 Status: In Transit</p>
-    <p><strong>Expected Delivery:</strong> 2nd September 2025 by end of the day</p>
 
-    <h2>Tracking History</h2>
-    <table>
-      <tr>
-        <th>Date & Time</th>
-        <th>Location</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>30th August 2025, 8:30 AM</td>
-        <td>Saint Petersburg, Russia</td>
-        <td>📨 Item received from shipper</td>
-      </tr>
-      <tr>
-        <td>30th August 2025, 2:15 PM</td>
-        <td>Saint Petersburg, Russia</td>
-        <td>📦 Item departed</td>
-      </tr>
-      <tr>
-        <td>31st August 2025, 6:45 AM</td>
-        <td>Paris, France</td>
-        <td>✅ Item arrived</td>
-      </tr>
-      <tr>
-        <td>31st August 2025, 8:20 AM</td>
-        <td>Paris, France</td>
-        <td>🔍 Item scanned at facility</td>
-      </tr>
-      <tr>
-        <td>31st August 2025, 10:30 AM</td>
-        <td>Paris, France</td>
-        <td>📦 Item departed</td>
-      </tr>
-      <tr>
-        <td>1st September 2025, 4:00 PM</td>
-        <td>Halifax, Nova Scotia, Canada</td>
-        <td>✅ Item arrived</td>
-      </tr>
-      <tr>
-        <td>1st September 2025, 5:10 PM</td>
-        <td>Halifax, Nova Scotia, Canada</td>
-        <td>📦 Item departed</td>
-      </tr>
-      <tr>
-        <td>2nd September 2025, 9:30 AM</td>
-        <td>New York, USA</td>
-        <td>✅ Item arrived</td>
-      </tr>
-    </table>
+  <div class="container">
+    <div id="tracking-form">
+      <h2>Enter Tracking Code</h2>
+      <input type="text" id="trackingCodeInput" placeholder="Enter Tracking Code">
+      <button onclick="checkTracking()">Track</button>
+      <p id="error" style="color:red; display:none;">Invalid tracking code. Please try again.</p>
+    </div>
 
-    <div class="section">
+    <div id="tracking-details" class="hidden">
+      <h2>Shipment Details</h2>
+      <p><strong>Tracking Code:</strong> TR599652932</p>
+      <p><strong>Status:</strong> 🟡 In Transit</p>
+      <p><strong>Expected Delivery:</strong> 2nd September 2025 by end of the day</p>
+
+      <h2>Tracking History</h2>
+      <table>
+        <tr>
+          <th>Date & Time</th>
+          <th>Location</th>
+          <th>Event</th>
+        </tr>
+        <tr>
+          <td>30th August 2025, 8:15 AM</td>
+          <td>Saint Petersburg, Russia</td>
+          <td>📨 Item received from shipper</td>
+        </tr>
+        <tr>
+          <td>30th August 2025, 8:45 AM</td>
+          <td>Moscow, Russia</td>
+          <td>📦 Item departed from sorting facility</td>
+        </tr>
+        <tr>
+          <td>31st August 2025, 1:30 AM</td>
+          <td>Warsaw, Poland</td>
+          <td>✅ Item arrived at sorting facility</td>
+        </tr>
+        <tr>
+          <td>31st August 2025, 4:20 AM</td>
+          <td>Berlin, Germany</td>
+          <td>📦 Item departed from sorting facility</td>
+        </tr>
+        <tr>
+          <td>1st September 2025, 6:45 PM</td>
+          <td>Paris, France</td>
+          <td>✅ Item arrived at Paris facility</td>
+        </tr>
+        <tr>
+          <td>1st September 2025, 9:00 PM</td>
+          <td>Paris, France</td>
+          <td>📦 Item departed from Paris facility</td>
+        </tr>
+        <tr>
+          <td>2nd September 2025, 7:15 AM</td>
+          <td>New York, USA</td>
+          <td>✅ Item arrived at New York facility</td>
+        </tr>
+      </table>
+
       <h2>Shipper Information</h2>
       <p><strong>Name:</strong> Ron Delucca</p>
       <p><strong>Location:</strong> Russia</p>
       <p><strong>Email:</strong> deluccar1948@gmail.com</p>
-    </div>
 
-    <div class="section">
       <h2>Receiver Information</h2>
       <p><strong>Name:</strong> Matthew Joseph Estilette</p>
       <p><strong>Location:</strong> USA</p>
       <p><strong>Address:</strong> 1113 David St, New Iberia, LA 70560, USA</p>
     </div>
-  </main>
+  </div>
+
+  <script>
+    function checkTracking() {
+      const input = document.getElementById("trackingCodeInput").value.trim();
+      const error = document.getElementById("error");
+      if (input === "TR599652932") {
+        document.getElementById("tracking-details").classList.remove("hidden");
+        document.getElementById("tracking-form").classList.add("hidden");
+      } else {
+        error.style.display = "block";
+      }
+    }
+  </script>
 </body>
 </html>
