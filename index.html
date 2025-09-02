@@ -32,9 +32,35 @@
       padding: 20px;
       background: white;
       border-radius: 8px;
-      display: inline-block;
+      display: none; /* hidden until correct code */
       text-align: left;
-      min-width: 320px;
+      min-width: 350px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    .info-box {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .error {
+      margin-top: 15px;
+      color: red;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -44,6 +70,7 @@
   <input type="text" id="trackingCode" placeholder="Enter Tracking Code">
   <button onclick="trackPackage()">Track</button>
 
+  <div id="error" class="error"></div>
   <div id="result"></div>
 
   <script>
@@ -56,7 +83,7 @@
         currentLocation: "Saint Petersburg, Russia",
         expectedDelivery: "2nd September 2025 by end of the day",
         history: [
-          "29th August 2025, 11:00 AM – Item received from shipper, Saint Petersburg, Russia"
+          { date: "29th August 2025", time: "11:00 AM", event: "Item received from shipper", location: "Saint Petersburg, Russia" }
         ]
       }
     };
@@ -64,21 +91,44 @@
     function trackPackage() {
       const code = document.getElementById("trackingCode").value.trim();
       const resultDiv = document.getElementById("result");
+      const errorDiv = document.getElementById("error");
 
       if (shipments[code]) {
+        errorDiv.innerHTML = "";
+        resultDiv.style.display = "block";
         const s = shipments[code];
+
+        // Build tracking history table
+        let historyTable = `
+          <table>
+            <tr><th>Date</th><th>Time</th><th>Location</th><th>Event</th></tr>
+            ${s.history.map(h => `
+              <tr>
+                <td>${h.date}</td>
+                <td>${h.time}</td>
+                <td>${h.location}</td>
+                <td>${h.event}</td>
+              </tr>`).join("")}
+          </table>
+        `;
+
         resultDiv.innerHTML = `
           <h2>${s.company}</h2>
           <h3>Status: ${s.status}</h3>
-          <p><b>From:</b> ${s.shipper}</p>
-          <p><b>To:</b> ${s.receiver}</p>
           <p><b>Current Location:</b> ${s.currentLocation}</p>
           <p><b>Expected Delivery:</b> ${s.expectedDelivery}</p>
-          <h4>History:</h4>
-          <ul>${s.history.map(h => `<li>${h}</li>`).join("")}</ul>
+          
+          <h4>📜 Tracking History:</h4>
+          ${historyTable}
+
+          <div class="info-box">
+            <p><b>Shipper:</b> ${s.shipper}</p>
+            <p><b>Receiver:</b> ${s.receiver}</p>
+          </div>
         `;
       } else {
-        resultDiv.innerHTML = "<p>❌ Tracking code not found.</p>";
+        resultDiv.style.display = "none";
+        errorDiv.innerHTML = "❌ Tracking code not found.";
       }
     }
   </script>
