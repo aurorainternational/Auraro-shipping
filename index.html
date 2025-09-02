@@ -19,6 +19,7 @@
     tr:hover { background-color: #e0f0ff; }
     .hidden { display: none; }
     .note { color: #990000; font-weight: bold; margin-top: 20px; border: 2px solid #990000; padding: 12px; border-radius: 5px; background: #ffcccc; }
+    .red-bold { color: #990000; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -43,13 +44,15 @@
       <h3>Tracking History</h3>
       <table>
         <tr><th>Date & Time</th><th>Location</th><th>Update</th></tr>
-        <tr><td>30th August 2025, 9:15 AM</td><td>Saint Petersburg, Russia</td><td>Item departed from St. Petersburg facility</td></tr>
-        <tr><td>31st August 2025, 8:00 PM</td><td>Warsaw, Poland</td><td>Item arrived at Warsaw sorting facility</td></tr>
-        <tr><td>31st August 2025, 11:00 PM</td><td>Warsaw, Poland</td><td>Item departed from Warsaw facility</td></tr>
-        <tr><td>1st September 2025, 10:30 AM</td><td>London, UK</td><td>Item arrived at London Heathrow hub</td></tr>
-        <tr><td>1st September 2025, 1:30 PM</td><td>London, UK</td><td>Item departed from London hub</td></tr>
-        <tr><td>2nd September 2025, 6:00 AM</td><td>New York, USA</td><td>Item arrived at New York facility</td></tr>
-        <tr><td>2nd September 2025, 6:05 AM</td><td>New York, USA</td><td>⚠️ Item on hold – Clearance fee of $9,500 must be paid before delivery continues</td></tr>
+        <tr><td>30th August 2025, 8:30 AM</td><td>Saint Petersburg, Russia</td><td>📨 Item received from shipper</td></tr>
+        <tr><td>30th August 2025, 2:15 PM</td><td>Saint Petersburg, Russia</td><td>📦 Item departed from sorting facility</td></tr>
+        <tr><td>31st August 2025, 6:45 AM</td><td>Paris, France</td><td>✅ Item arrived at Paris</td></tr>
+        <tr><td>31st August 2025, 8:20 AM</td><td>Paris, France</td><td>🔍 Item scanned at Paris facility</td></tr>
+        <tr><td>31st August 2025, 10:30 AM</td><td>Paris, France</td><td>📦 Item departed from Paris</td></tr>
+        <tr><td>1st September 2025, 4:00 PM</td><td>Halifax, Nova Scotia, Canada</td><td>✅ Item arrived at Halifax</td></tr>
+        <tr><td>1st September 2025, 5:10 PM</td><td>Halifax, Nova Scotia, Canada</td><td>📦 Item departed Halifax</td></tr>
+        <tr><td>2nd September 2025, 9:30 AM</td><td>New York, USA</td><td>✅ Item arrived at New York</td></tr>
+        <tr><td>2nd September 2025, 9:35 AM</td><td>New York, USA</td><td class="red-bold">⚠️ Item on hold – Clearance fee of $9,500 must be paid before delivery continues</td></tr>
       </table>
 
       <h3>Shipper Information</h3>
