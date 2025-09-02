@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auraro International Shipping - Package Tracking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: #f4f4f4;
+    }
+    input {
+      padding: 10px;
+      width: 280px;
+      margin-right: 5px;
+    }
+    button {
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      display: inline-block;
+      text-align: left;
+      min-width: 320px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📦 Auraro International Shipping - Track Your Package</h1>
+
+  <input type="text" id="trackingCode" placeholder="Enter Tracking Code">
+  <button onclick="trackPackage()">Track</button>
+
+  <div id="result"></div>
+
+  <script>
+    const shipments = {
+      "TR599652932": {
+        company: "Auraro International Shipping",
+        shipper: "Ron Delucca, Saint Petersburg, Russia (deluccar1948@gmail.com)",
+        receiver: "Matthew Joseph Estilette, 1113 David St, New Iberia, LA 70560, USA",
+        status: "🟡 In Transit",
+        currentLocation: "Saint Petersburg, Russia",
+        expectedDelivery: "2nd September 2025 by end of the day",
+        history: [
+          "29th August 2025, 11:00 AM – Item received from shipper, Saint Petersburg, Russia"
+        ]
+      }
+    };
+
+    function trackPackage() {
+      const code = document.getElementById("trackingCode").value.trim();
+      const resultDiv = document.getElementById("result");
+
+      if (shipments[code]) {
+        const s = shipments[code];
+        resultDiv.innerHTML = `
+          <h2>${s.company}</h2>
+          <h3>Status: ${s.status}</h3>
+          <p><b>From:</b> ${s.shipper}</p>
+          <p><b>To:</b> ${s.receiver}</p>
+          <p><b>Current Location:</b> ${s.currentLocation}</p>
+          <p><b>Expected Delivery:</b> ${s.expectedDelivery}</p>
+          <h4>History:</h4>
+          <ul>${s.history.map(h => `<li>${h}</li>`).join("")}</ul>
+        `;
+      } else {
+        resultDiv.innerHTML = "<p>❌ Tracking code not found.</p>";
+      }
+    }
+  </script>
+</body>
+</html>
