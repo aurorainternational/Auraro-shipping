@@ -2,120 +2,154 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Auraro International Shipping - Tracking</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f8f9fa;
+      background: #f4f6f9;
       margin: 0;
       padding: 0;
-    }
-    header {
-      background: #004080;
-      color: white;
-      padding: 15px;
       text-align: center;
     }
+    header {
+      background: #003366;
+      color: white;
+      padding: 20px;
+    }
     .container {
-      width: 90%;
+      margin: 30px auto;
       max-width: 900px;
-      margin: 20px auto;
       background: white;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
     }
-    h2 {
-      color: #004080;
-      margin-bottom: 10px;
+    input[type="text"] {
+      padding: 10px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #003366;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0055aa;
+    }
+    #tracking-details {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 15px 0;
+      margin-top: 15px;
     }
     th, td {
-      border: 1px solid #ddd;
       padding: 10px;
+      border: 1px solid #ddd;
       text-align: left;
     }
     th {
-      background: #004080;
+      background: #003366;
       color: white;
     }
-    tr:nth-child(even) {
-      background: #f2f2f2;
-    }
-    .info {
-      margin-top: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      background: #f9f9f9;
+    .error {
+      color: red;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Auraro International Shipping</h1>
-    <p>Shipment Tracking</p>
+    <p>Track your shipment easily</p>
   </header>
 
   <div class="container">
-    <h2>Tracking Code: TR599652932</h2>
-    <p><strong>Status:</strong> In Transit</p>
-    <p><strong>Expected Delivery:</strong> 2nd September 2025 by end of the day</p>
+    <h2>Enter Tracking Code</h2>
+    <input type="text" id="trackingCode" placeholder="Enter your tracking code">
+    <button onclick="checkTracking()">Track</button>
+    <p class="error" id="error-message"></p>
 
-    <h2>Tracking History</h2>
-    <table>
-      <tr>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Location</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>30th August 2025</td>
-        <td>9:00 AM</td>
-        <td>Saint Petersburg, Russia</td>
-        <td>Item received from shipper</td>
-      </tr>
-      <tr>
-        <td>30th August 2025</td>
-        <td>2:30 PM</td>
-        <td>Saint Petersburg International Facility</td>
-        <td>Item departed from sorting facility</td>
-      </tr>
-      <tr>
-        <td>31st August 2025</td>
-        <td>11:45 AM</td>
-        <td>Frankfurt, Germany</td>
-        <td>Item arrived at transit hub</td>
-      </tr>
-      <tr>
-        <td>31st August 2025</td>
-        <td>5:10 PM</td>
-        <td>Frankfurt International Airport</td>
-        <td>Item departed, in transit to USA</td>
-      </tr>
-      <tr>
-        <td>2nd September 2025</td>
-        <td>10:20 AM</td>
-        <td>New York JFK Airport, USA</td>
-        <td>Item arrived at U.S. entry facility</td>
-      </tr>
-    </table>
+    <div id="tracking-details">
+      <h3>Shipment Information</h3>
+      <p><strong>Tracking Code:</strong> TR599652932</p>
+      <p><strong>Status:</strong> 🟡 In Transit</p>
+      <p><strong>Expected Delivery:</strong> 2nd September 2025 by end of the day</p>
 
-    <div class="info">
+      <h3>Tracking History</h3>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>30th August 2025</td>
+          <td>9:00 AM</td>
+          <td>Saint Petersburg, Russia</td>
+          <td>Item received from shipper</td>
+        </tr>
+        <tr>
+          <td>31st August 2025</td>
+          <td>3:15 PM</td>
+          <td>Warsaw, Poland</td>
+          <td>Item departed from Warsaw facility</td>
+        </tr>
+        <tr>
+          <td>1st September 2025</td>
+          <td>8:45 AM</td>
+          <td>Paris, France</td>
+          <td>Item arrived at Paris facility</td>
+        </tr>
+        <tr>
+          <td>1st September 2025</td>
+          <td>9:30 PM</td>
+          <td>London, UK</td>
+          <td>Item departed from London facility</td>
+        </tr>
+        <tr>
+          <td>2nd September 2025</td>
+          <td>6:20 AM</td>
+          <td>New York, USA</td>
+          <td>Item arrived at New York facility</td>
+        </tr>
+      </table>
+
       <h3>Shipper Information</h3>
       <p><strong>Name:</strong> Ron Delucca</p>
-      <p><strong>Location:</strong> Saint Petersburg, Russia</p>
+      <p><strong>Location:</strong> Russia</p>
       <p><strong>Email:</strong> deluccar1948@gmail.com</p>
 
       <h3>Receiver Information</h3>
       <p><strong>Name:</strong> Matthew Joseph Estilette</p>
+      <p><strong>Location:</strong> USA</p>
       <p><strong>Address:</strong> 1113 David St, New Iberia, LA 70560, USA</p>
     </div>
   </div>
+
+  <script>
+    function checkTracking() {
+      const code = document.getElementById("trackingCode").value.trim();
+      const details = document.getElementById("tracking-details");
+      const error = document.getElementById("error-message");
+
+      if (code === "TR599652932") {
+        details.style.display = "block";
+        error.textContent = "";
+      } else {
+        details.style.display = "none";
+        error.textContent = "❌ Tracking code not found. Please try again.";
+      }
+    }
+  </script>
 </body>
 </html>
